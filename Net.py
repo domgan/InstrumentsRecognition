@@ -2,8 +2,12 @@ from tensorflow import keras
 import Preprocess
 
 model = keras.Sequential([
-    keras.layers.Conv2D(64, (3, 3), input_shape=(128, 293, 1), activation='relu'),
+    keras.layers.Conv2D(32, (5, 5), input_shape=(128, 293, 1), activation='relu'),
     keras.layers.MaxPooling2D(pool_size=(2, 2)),
+
+    keras.layers.Conv2D(64, (3, 3), activation='relu'),
+    keras.layers.MaxPooling2D(pool_size=(2, 2)),
+
     keras.layers.Flatten(),
     keras.layers.Dense(128, activation='relu'),
     keras.layers.Dense(3, activation='sigmoid')

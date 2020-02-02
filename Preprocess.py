@@ -39,13 +39,13 @@ def part_train(ins, num_of_samples):
         return np.array(arr)
 
 
-P = part_train('piano', 31)
+P = part_train('piano', 41)
 G = part_train('guitar', 31)
 D = part_train('drums', 31)
 train_input = np.concatenate((P, G, D))
 
 
-Pt = np.zeros((31,3))
+Pt = np.zeros((41,3))
 Pt[:, 0] = 1
 Gt = np.zeros((31,3))
 Gt[:, 1] = 1
