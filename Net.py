@@ -18,4 +18,3 @@ print('test loss, test acc:', results)
 
 model.save("model.h5")
 print("Saved model to disk")
-
