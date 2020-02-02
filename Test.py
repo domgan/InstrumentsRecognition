@@ -6,7 +6,7 @@ import Preprocess
 from tensorflow import keras
 import numpy as np
 
-model = keras.models.load_model('model.h5')
+model = keras.models.load_model('model/model.h5')
 
 
 def instrument(path):

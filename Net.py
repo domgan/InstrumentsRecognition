@@ -22,5 +22,5 @@ model.fit(Preprocess.train_input, Preprocess.train_labels, epochs=5)
 results = model.evaluate(Preprocess.test_input, Preprocess.test_labels)
 print('test loss, test acc:', results)
 
-model.save("model.h5")
+model.save("model/model.h5")
 print("Saved model to disk")
