@@ -11,6 +11,7 @@ model = keras.models.load_model('model.h5')
 p = Preprocess.melspec('data/predict/pp0.wav')
 
 p = np.expand_dims(p, 0)
+p = np.expand_dims(p, 3)
 
 predictions_single = model.predict(p)
 print(predictions_single[0])

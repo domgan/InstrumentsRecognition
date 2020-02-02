@@ -85,3 +85,9 @@ for i in range(11,22):
     test_labels[i] = 1
 for i in range(22, 33):
     test_labels[i] = 2
+
+
+"""adding fourth dimension for cNN"""
+
+train_input = np.expand_dims(train_input, 3)
+test_input = np.expand_dims(test_input, 3)
