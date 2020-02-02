@@ -45,13 +45,11 @@ D = part_train('drums', 31)
 train_input = np.concatenate((P, G, D))
 
 
-Pt = np.zeros((31,3))
-Pt[:, 0] = 1
-Gt = np.zeros((31,3))
-Gt[:, 1] = 1
-Dt = np.zeros((31,3))
-Dt[:, 2] = 1
-train_labels = np.concatenate((Pt, Gt, Dt))
+train_labels = np.zeros(93)
+for i in range(31,62):
+    train_labels[i] = 1
+for i in range(62, 93):
+    train_labels[i] = 2
 
 
 """ Test Input """
@@ -82,13 +80,11 @@ TD = part_test('drums', 11)
 test_input = np.concatenate((TP, TG, TD))
 
 
-TPt = np.zeros((11, 3))
-TPt[:, 0] = 1
-TGt = np.zeros((11, 3))
-TGt[:, 1] = 1
-TDt = np.zeros((11, 3))
-TDt[:, 2] = 1
-test_labels = np.concatenate((TPt, TGt, TDt))
+test_labels = np.zeros(33)
+for i in range(11,22):
+    test_labels[i] = 1
+for i in range(22, 33):
+    test_labels[i] = 2
 
 
 """adding fourth dimension for cNN"""

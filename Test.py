@@ -8,19 +8,30 @@ import numpy as np
 
 model = keras.models.load_model('model.h5')
 
-p = Preprocess.melspec('data/predict/pp0.wav')
 
-p = np.expand_dims(p, 0)
-p = np.expand_dims(p, 3)
+def instrument(path):
+    p = Preprocess.melspec(path)
 
-predictions_single = model.predict(p)
-print(predictions_single[0])
-if np.argmax(predictions_single[0]) == 0:
-    ins = 'Piano'
-    print(ins)
-elif np.argmax(predictions_single[0]) == 1:
-    ins = 'Guitar'
-    print(ins)
-elif np.argmax(predictions_single[0]) == 2:
-    ins = 'Drums'
-    print(ins)
+    p = np.expand_dims(p, 0)
+    p = np.expand_dims(p, 3)
+
+    predictions_single = model.predict(p)
+    print(predictions_single[0])
+    predictions = predictions_single[0]
+    pins = ''
+    gins = ''
+    dins = ''
+    if predictions[0] > 0.5:
+        pins = 'Piano '
+    elif predictions[1] > 0.5:
+        gins = 'Guitar '
+    elif predictions[2] > 0.5:
+        dins = 'Drums '
+    else:
+        print('----')
+    print(pins + gins + dins)
+
+
+instrument('data/predict/pp0.wav')
+instrument('data/predict/pg0.wav')
+instrument('data/predict/pd0.wav')

@@ -1,17 +1,16 @@
 from tensorflow import keras
-import Preprocess
+import Preprocess_old as Preprocess
 
 model = keras.Sequential([
-    keras.layers.Conv2D(64, (3, 3), input_shape=(128, 293, 1), activation='relu'),
-    keras.layers.MaxPooling2D(pool_size=(2, 2)),
-    keras.layers.Flatten(),
-    keras.layers.Dense(128, activation='relu'),
-    keras.layers.Dense(3, activation='sigmoid')
-    ])
+    keras.layers.Flatten(input_shape=(128, 293)),
+    keras.layers.Dense(128*2, activation='relu'),
+    keras.layers.Dense(3, activation='softmax')
+])
 
 model.compile(optimizer='adam',
-              loss='binary_crossentropy',
+              loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
+
 
 model.fit(Preprocess.train_input, Preprocess.train_labels, epochs=5)
 
