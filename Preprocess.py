@@ -5,10 +5,6 @@ import scipy
 
 def melspec(path):  # load wave and compute melspectrogram
     bits = 16
-    #fs, y = scipy.io.wavfile.read(path)
-    #y = np.float64(y)
-    #y = y.T
-    #y = librosa.core.to_mono(y)
     y, fs = librosa.core.load(path)
     y = y[0:150000]
     if np.max(y) > 1:
@@ -37,21 +33,36 @@ def part_train(ins, num_of_samples):
             data = melspec('data/d'+str(i)+'.wav')
             arr.append(data)
         return np.array(arr)
+    elif ins == 'combined':
+        for i in range(num_of_samples):
+            data = melspec('data/c'+str(i)+'.wav')
+            arr.append(data)
+        return np.array(arr)
 
 
-P = part_train('piano', 41)
-G = part_train('guitar', 31)
-D = part_train('drums', 31)
-train_input = np.concatenate((P, G, D))
+num_of_P = 41
+num_of_G = 31
+num_of_D = 31
+num_of_C = 2
 
 
-Pt = np.zeros((41,3))
+P = part_train('piano', num_of_P)
+G = part_train('guitar', num_of_G)
+D = part_train('drums', num_of_D)
+C = part_train('combined', num_of_C)
+train_input = np.concatenate((P, G, D, C))
+
+
+Pt = np.zeros((num_of_P, 3))
 Pt[:, 0] = 1
-Gt = np.zeros((31,3))
+Gt = np.zeros((num_of_G, 3))
 Gt[:, 1] = 1
-Dt = np.zeros((31,3))
+Dt = np.zeros((num_of_D, 3))
 Dt[:, 2] = 1
-train_labels = np.concatenate((Pt, Gt, Dt))
+Ct = np.zeros((num_of_C, 3))
+Ct[:, 0] = 1
+Ct[:, 2] = 1
+train_labels = np.concatenate((Pt, Gt, Dt, Ct))
 
 
 """ Test Input """

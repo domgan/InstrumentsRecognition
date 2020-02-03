@@ -21,12 +21,13 @@ def instrument(path):
     pins = ''
     gins = ''
     dins = ''
-    if predictions[0] > 0.5:
-        pins = 'Piano '
-    elif predictions[1] > 0.5:
-        gins = 'Guitar '
-    elif predictions[2] > 0.5:
-        dins = 'Drums '
+    if np.any(predictions) > 0.5:
+        if predictions[0] > 0.5:
+            pins = 'Piano '
+        if predictions[1] > 0.5:
+            gins = 'Guitar '
+        if predictions[2] > 0.5:
+            dins = 'Drums '
     else:
         print('----')
     print(pins + gins + dins)
@@ -35,3 +36,4 @@ def instrument(path):
 instrument('data/predict/pp0.wav')
 instrument('data/predict/pg0.wav')
 instrument('data/predict/pd0.wav')
+instrument('data/predict/pc0.wav')
