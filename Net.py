@@ -9,7 +9,7 @@ model = keras.Sequential([
     keras.layers.MaxPooling2D(pool_size=(2, 2)),
 
     keras.layers.Flatten(),
-    keras.layers.Dense(128, activation='relu'),
+    keras.layers.Dense(64, activation='relu'),
     keras.layers.Dense(3, activation='sigmoid')
     ])
 
@@ -17,7 +17,7 @@ model.compile(optimizer='adam',
               loss='binary_crossentropy',
               metrics=['accuracy'])
 
-model.fit(Preprocess.train_input, Preprocess.train_labels, epochs=5)
+model.fit(Preprocess.train_input, Preprocess.train_labels, epochs=4)
 
 results = model.evaluate(Preprocess.test_input, Preprocess.test_labels)
 print('test loss, test acc:', results)
